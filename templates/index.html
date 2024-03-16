@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>School Enrollment Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>School Enrollment Statistics</h1>
+        </header>
+        
+        <nav class="sidebar">
+            <ul>
+                <li><button onclick="showChart('mdsplot')">MDS Chart</button></li>
+                <li><button onclick="showChart('mdscatter')">Cluster MDS Chart</button></li>
+                <li><button onclick="showChart('parallel')">Parallel Coordinates Plot</button></li>
+                <li><button onclick="showChart('clustparallel')">Clustered Parallel Coordinates Plot</button></li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <div id="mdsplot" class="chart-container" style="display: none;"></div>
+            <div id="mdscatter" class="chart-container" style="display: none;"></div>
+            <div id="parallel" class="chart-container" style="display: none; overflow-x: auto;"></div>
+            <div id="clustparallel" class="chart-container" style="display: none; overflow-x: auto;"></div>
+        </main>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="module" src="{{ url_for('static', filename='app.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='mdsplot.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='mdscatter.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='parallel.js') }}"></script>
+    <script type="module" src="{{ url_for('static', filename='clustparallel.js') }}"></script>
+
+    <script>
+        function showChart(chartId) {
+            // Hide all charts
+            document.querySelectorAll('.chart-container').forEach(chart => {
+                chart.style.display = 'none';
+            });
+
+            // Show the selected chart
+            document.getElementById(chartId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
